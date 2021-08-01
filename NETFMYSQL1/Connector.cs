@@ -8,9 +8,11 @@ namespace NETFMYSQL1
     {
         public static bool Ready { get; set; } = false;
         public static MySqlConnection _connection;
+        public static string Message = "";
         public static bool Get(string context = "DBACTIVECON")
         {
             Ready = false;
+            Message = "";
             string cs = System.Configuration.ConfigurationManager.ConnectionStrings[context].ConnectionString;
             if (!String.IsNullOrWhiteSpace(cs))
             {
@@ -25,6 +27,7 @@ namespace NETFMYSQL1
                 }
                 catch (MySqlException Error)
                 {
+                    Message = Error.Message;
                 }
                 finally
                 {
@@ -37,6 +40,7 @@ namespace NETFMYSQL1
         public static DataTable GetTable(string Sql)
         {
             DataTable dt = new DataTable();
+            Message = "";
             if (Ready)
             {
                 MySqlDataAdapter da = new MySqlDataAdapter();
@@ -47,9 +51,9 @@ namespace NETFMYSQL1
                     da.Fill(dt);
                     da.Dispose();
                 }
-                catch
+                catch (Exception Error)
                 {
-                    throw;
+                    Message = Error.Message;
                 }
             }
             return dt;
