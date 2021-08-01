@@ -4,7 +4,7 @@ using System.Data;
 
 namespace NETFMYSQL1
 {
-    class Connector
+    public class Connector
     {
         public static bool Ready { get; set; } = false;
         public static MySqlConnection _connection;
