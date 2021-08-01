@@ -10,7 +10,7 @@ namespace NETFMYSQL1
 
             if (Connector.Get())
             {
-                DataTable r = Connector.GetTable("select * from tbcadcul");
+                DataTable r = Connector.GetTable("select * from uf");
 
                 for (int i = 0; i < r.Rows.Count; i++)
                 {
