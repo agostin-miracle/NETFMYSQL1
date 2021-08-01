@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace NETFMYSQL1
 {
@@ -10,6 +7,20 @@ namespace NETFMYSQL1
     {
         static void Main(string[] args)
         {
+
+            if (Connector.Get())
+            {
+                DataTable r = Connector.GetTable("select * from tbcadcul");
+
+                for (int i = 0; i < r.Rows.Count; i++)
+                {
+                    Console.WriteLine("{0} {1}", r.Rows[i][0].ToString(), r.Rows[i][1].ToString());
+                }
+            }
+            Console.WriteLine("Pressione qualquer tecla para continuar");
+            Console.ReadKey();
+
+
         }
     }
 }
